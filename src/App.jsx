@@ -1,3 +1,5 @@
+
+
 function App() {
     return(
         <div className='w-full mt-10'>
@@ -7,3 +9,7 @@ function App() {
 }
 
 export default App
+
+//     <Routes>
+//         <Route path='/' element={} />
+//     </Routes>
