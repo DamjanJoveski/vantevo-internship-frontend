@@ -9,7 +9,7 @@ export function Login({ handleChange }) {
   const handleLogin = async () => {
     const data = { email, password };
     try {
-      const response = await fetch(`${ENDPOINT}/login`, {
+      const response = await fetch(`${ENDPOINT}login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

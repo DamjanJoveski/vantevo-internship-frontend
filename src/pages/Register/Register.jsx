@@ -10,7 +10,7 @@ export function Register({ handleChange }) {
   const handleRegister = async () => {
     const data = { email, password, retypePass };
     try {
-      const response = await fetch(`${ENDPOINT}/register`, {
+      const response = await fetch(`${ENDPOINT}register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
