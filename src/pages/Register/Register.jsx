@@ -1,4 +1,38 @@
-export function RegisterForm({ isLoginMode, handleChange }) {
+import { useState } from "react";
+
+export const ENDPOINT = "http://127.0.0.1:5000/";
+
+export function Register({ handleChange }) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [retypePass, setRetypePass] = useState("");
+
+  const handleRegister = async () => {
+    const data = { email, password, retypePass };
+    try {
+      const response = await fetch(`${ENDPOINT}/register`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log("Successfully registered!");
+      } else {
+        console.log("Registration failed");
+      }
+
+      // Reset form fields after successful registration
+      setEmail("");
+      setPassword("");
+      setEmail("");
+    } catch (error) {
+      console.error("Error occurred during registration:", error);
+    }
+  };
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -7,7 +41,13 @@ export function RegisterForm({ isLoginMode, handleChange }) {
             <h1 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
               Create an account
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form
+              className="space-y-4 md:space-y-6"
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleRegister();
+              }}
+            >
               <div>
                 <label
                   htmlFor="email"
@@ -19,6 +59,8 @@ export function RegisterForm({ isLoginMode, handleChange }) {
                   type="email"
                   name="email"
                   id="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
@@ -35,6 +77,8 @@ export function RegisterForm({ isLoginMode, handleChange }) {
                   type="password"
                   name="password"
                   id="password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
@@ -48,9 +92,11 @@ export function RegisterForm({ isLoginMode, handleChange }) {
                   Confirm password
                 </label>
                 <input
-                  type="confirm-password"
+                  type="password"
                   name="confirm-password"
                   id="confirm-password"
+                  value={retypePass}
+                  onChange={(e) => setRetypePass(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required=""
@@ -65,10 +111,10 @@ export function RegisterForm({ isLoginMode, handleChange }) {
               <p className="flex justify-center text-white">
                 Already have an account?&nbsp;
                 <button
-                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
+                  className="font-bold hover:underline"
                   onClick={handleChange}
                 >
-                  {isLoginMode ? "Register" : "Login"} here
+                  Login
                 </button>
               </p>
             </form>
