@@ -1,9 +1,11 @@
 import {useState} from "react";
-export function Login() {
-    const ENDPOINT = 'http://127.0.0.1:5000/login';
+// eslint-disable-next-line react/prop-types
+export function Login({ENDPOINT}) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+
+    console.log(ENDPOINT)
 
     const handleLogin = async () => {
         const data = {username, password}
@@ -18,11 +20,11 @@ export function Login() {
 
             if(response.ok){
                 console.log('Successfully logged in!')
+                //redirect()
             }
             else{
                 console.log('login failed')
             }
-
         }
         catch (error){
             console.log(error.message)
