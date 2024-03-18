@@ -27,7 +27,7 @@ export function Register({ handleChange }) {
       // Reset form fields after successful registration
       setEmail("");
       setPassword("");
-      setEmail("");
+      setRetypePass("");
     } catch (error) {
       console.error("Error occurred during registration:", error);
     }
