@@ -1,16 +1,14 @@
 import {useState} from "react";
-// eslint-disable-next-line react/prop-types
-export function Login({ENDPOINT}) {
+import {ENDPOINT} from "../../consts.js";
+export function Login() {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    console.log(ENDPOINT)
-
     const handleLogin = async () => {
         const data = {username, password}
         try {
-            const response = await fetch(ENDPOINT, {
+            const response = await fetch(`${ENDPOINT}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

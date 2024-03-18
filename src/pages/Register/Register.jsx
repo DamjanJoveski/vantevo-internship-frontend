@@ -1,8 +1,6 @@
 import {useState} from "react";
-import {redirect} from "react-router-dom";
-
-
-export function Register({ENDPOINT}) {
+import {ENDPOINT} from "../../consts.js";
+export function Register() {
 
         const [username, setUsername] = useState('');
         const [password, setPassword] = useState('');
@@ -11,7 +9,7 @@ export function Register({ENDPOINT}) {
         const handleRegister = async () => {
             const data = {username, email ,password}
             try {
-                const response = await fetch(ENDPOINT, {
+                const response = await fetch(`${ENDPOINT}/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -21,7 +19,6 @@ export function Register({ENDPOINT}) {
 
                 if(response.ok){
                     console.log('Successfully registered!')
-                    //redirect()
                 }
                 else{
                     console.log('Registration failed')
