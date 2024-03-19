@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Login } from "./pages/Login/Login";
 import { Register } from "./pages/Register/Register";
 
+
+
 function App() {
   const [isLoginMode, setIsloginMode] = useState(true);
-
   function handleChange() {
     setIsloginMode(!isLoginMode);
   }
