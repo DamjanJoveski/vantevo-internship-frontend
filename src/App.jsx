@@ -1,15 +1,26 @@
-import {Login} from "./pages/Login/Login.jsx";
+import { useState } from "react";
+import { Login } from "./pages/Login/Login";
+import { Register } from "./pages/Register/Register";
 
 function App() {
-    return(
-        <div className='w-full mt-10'>
-            <h1 className='text-3xl text-blue-600 w-80 mx-auto'>Hello fellow interns</h1>
-            <Login/>
-        </div>
-    )
+  const [isLoginMode, setIsloginMode] = useState(true);
+
+  function handleChange() {
+    setIsloginMode(!isLoginMode);
+  }
+
+  return (
+    <div className="w-full bg-gray-50 dark:bg-gray-900">
+      {isLoginMode ? (
+        <Login handleChange={handleChange} />
+      ) : (
+        <Register handleChange={handleChange} />
+      )}
+    </div>
+  );
 }
 
-export default App
+export default App;
 
 //     <Routes>
 //         <Route path='/' element={} />
