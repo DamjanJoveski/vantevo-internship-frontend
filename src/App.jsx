@@ -1,24 +1,14 @@
-import { useEffect, useState } from "react";
-import { Login } from "./pages/Login/Login";
-import { Register } from "./pages/Register/Register";
-
-
+import {Listings} from "./pages/Listings/Listings.jsx";
+import {CreateListing} from "./components/CreateListing.jsx";
 
 function App() {
-  const [isLoginMode, setIsloginMode] = useState(true);
-  function handleChange() {
-    setIsloginMode(!isLoginMode);
-  }
 
-  return (
-    <div className="w-full bg-gray-50 dark:bg-gray-900">
-      {isLoginMode ? (
-        <Login handleChange={handleChange} />
-      ) : (
-        <Register handleChange={handleChange} />
-      )}
-    </div>
-  );
+    return(
+        <div className='w-full mt-10'>
+            <Listings/>
+            <CreateListing/>
+        </div>
+    )
 }
 
 export default App;
