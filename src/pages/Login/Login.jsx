@@ -1,30 +1,31 @@
-import { useState } from "react";
+import {useState} from "react";
+import {ENDPOINT} from "../../consts.js";
+export function Login() {
 
 export const ENDPOINT = "http://127.0.0.1:5000/";
 
-export function Login({ handleChange }) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const handleLogin = async () => {
+        const data = {username, password}
+        try {
+            const response = await fetch(`${ENDPOINT}login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            });
 
-  const handleLogin = async () => {
-    const data = { email, password };
-    try {
-      const response = await fetch(`${ENDPOINT}login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log("Successfully logged in!");
-        //redirect()
-      } else {
-        console.log("login failed");
-      }
-    } catch (error) {
-      console.log(error.message);
+            if(response.ok){
+                console.log('Successfully logged in!')
+                //redirect()
+            }
+            else{
+                console.log('login failed')
+            }
+        }
+        catch (error){
+            console.log(error.message)
+        }
     }
   };
 
