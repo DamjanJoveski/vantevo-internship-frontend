@@ -1,11 +1,16 @@
 import { useState } from "react";
+import { ENDPOINT } from "../../consts";
+import { useNavigate } from "react-router-dom";
 
-export const ENDPOINT = "http://127.0.0.1:5000/";
-
-export function Register({ handleChange }) {
+export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypePass, setRetypePass] = useState("");
+  const navigate = useNavigate();
+
+  function navigateToLogin() {
+    navigate("/login");
+  }
 
   const handleRegister = async () => {
     const data = { email, password, retypePass };
@@ -63,7 +68,7 @@ export function Register({ handleChange }) {
                   onChange={(e) => setEmail(e.target.value)}
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
-                  required=""
+                  required
                 ></input>
               </div>
               <div>
@@ -81,7 +86,7 @@ export function Register({ handleChange }) {
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
+                  required
                 ></input>
               </div>
               <div>
@@ -99,7 +104,7 @@ export function Register({ handleChange }) {
                   onChange={(e) => setRetypePass(e.target.value)}
                   placeholder="••••••••"
                   className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  required=""
+                  required
                 ></input>
               </div>
               <button
@@ -112,7 +117,7 @@ export function Register({ handleChange }) {
                 Already have an account?&nbsp;
                 <button
                   className="font-bold hover:underline"
-                  onClick={handleChange}
+                  onClick={navigateToLogin}
                 >
                   Login
                 </button>

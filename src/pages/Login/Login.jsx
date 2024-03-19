@@ -1,40 +1,44 @@
-import {useState} from "react";
-import {ENDPOINT} from "../../consts.js";
+import { useState } from "react";
+import { ENDPOINT } from "../../consts.js";
+import { useNavigate } from "react-router-dom";
+
 export function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
-export const ENDPOINT = "http://127.0.0.1:5000/";
+  function redirectTo(route) {
+    navigate(route);
+  }
 
-    const handleLogin = async () => {
-        const data = {username, password}
-        try {
-            const response = await fetch(`${ENDPOINT}login`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            });
+  const handleLogin = async () => {
+    const data = { email, password };
+    try {
+      const response = await fetch(`${ENDPOINT}login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-            if(response.ok){
-                console.log('Successfully logged in!')
-                //redirect()
-            }
-            else{
-                console.log('login failed')
-            }
-        }
-        catch (error){
-            console.log(error.message)
-        }
+      if (response.ok) {
+        console.log("Successfully logged in!");
+        //redirect()
+      } else {
+        console.log("login failed");
+      }
+    } catch (error) {
+      console.log(error.message);
     }
   };
 
   return (
     <section>
       <div className="flex flex-col items-center justify-center mx-auto md:h-screen ">
-        <div className="lg:w-full bg-white rounded-lg shadow dark:border md:mt-0   sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
+        <div className="lg:w-full bg-white rounded-lg shadow border md:mt-0   sm:max-w-md xl:p-0 bg-gray-800 border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold text-gray-900 md:text-2xl dark:text-white">
+            <h1 className="text-xl font-bold text-gray-900 md:text-2xl text-white">
               Log in to your account
             </h1>
             <form
@@ -47,7 +51,7 @@ export const ENDPOINT = "http://127.0.0.1:5000/";
               <div>
                 <label
                   htmlFor="email"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-gray-900 text-white"
                 >
                   Your email
                 </label>
@@ -57,7 +61,7 @@ export const ENDPOINT = "http://127.0.0.1:5000/";
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   placeholder="name@company.com"
                   required=""
                 ></input>
@@ -65,7 +69,7 @@ export const ENDPOINT = "http://127.0.0.1:5000/";
               <div>
                 <label
                   htmlFor="password"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  className="block mb-2 text-sm font-medium text-gray-900 text-white"
                 >
                   Password
                 </label>
@@ -76,7 +80,7 @@ export const ENDPOINT = "http://127.0.0.1:5000/";
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="••••••••"
-                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   required=""
                 ></input>
               </div>
@@ -90,9 +94,17 @@ export const ENDPOINT = "http://127.0.0.1:5000/";
                 Don&apos;t have an account?&nbsp;
                 <button
                   className="font-bold hover:underline"
-                  onClick={handleChange}
+                  onClick={() => redirectTo("/register")}
                 >
                   Register
+                </button>
+              </p>
+              <p className="flex justify-center text-white">
+                <button
+                  className="font-bold hover:underline"
+                  onClick={() => redirectTo("/forgot-password")}
+                >
+                  Forgot password?
                 </button>
               </p>
             </form>
