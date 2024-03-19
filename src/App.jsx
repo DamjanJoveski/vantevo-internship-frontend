@@ -15,7 +15,6 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/listings" element={<Listings />} />
         <Route path="/create-listings" element={<CreateListing />}></Route>
-        <Route path="/create" element={<CreateListing />}></Route>
         <Route path="/listing-preview" element={<ListingPreview />}></Route>
       </Routes>
     </div>
