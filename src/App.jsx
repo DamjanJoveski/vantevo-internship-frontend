@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { Login } from "./pages/Login/Login.jsx";
 import { Register } from "./pages/Register/Register.jsx";
 import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword.jsx";
-import { ListingPreview } from "./components/ListingPreview.jsx";
+import { ListingDetails } from "./pages/Listing/Listing.jsx";
 
 function App() {
   return (
@@ -15,7 +15,7 @@ function App() {
         <Route path="/forgot-password" element={<ForgotPassword />}></Route>
         <Route path="/listings" element={<Listings />} />
         <Route path="/create-listings" element={<CreateListing />}></Route>
-        <Route path="/listing-preview" element={<ListingPreview />}></Route>
+        <Route path="/listing/:id" element={<ListingDetails />}></Route>
       </Routes>
     </div>
   );
