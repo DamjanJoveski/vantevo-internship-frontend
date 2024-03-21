@@ -1,41 +1,26 @@
 import { useState } from "react";
 import { ENDPOINT } from "../../consts";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { register } from "../../redux/User/UserActions";
 
 export function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [retypePass, setRetypePass] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function navigateToLogin() {
     navigate("/login");
   }
 
   const handleRegister = async () => {
-    const data = { email, password, retypePass };
-    try {
-      const response = await fetch(`${ENDPOINT}register`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log("Successfully registered!");
-      } else {
-        console.log("Registration failed");
-      }
-
-      // Reset form fields after successful registration
-      setEmail("");
-      setPassword("");
-      setRetypePass("");
-    } catch (error) {
-      console.error("Error occurred during registration:", error);
-    }
+    dispatch(register({ email, password }));
+    // Reset form fields after successful registration
+    setEmail("");
+    setPassword("");
+    setRetypePass("");
   };
 
   return (

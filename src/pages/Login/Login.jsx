@@ -1,36 +1,21 @@
 import { useState } from "react";
 import { ENDPOINT } from "../../consts.js";
 import { useNavigate } from "react-router-dom";
+import { login } from "../../redux/User/UserActions.js";
+import { useDispatch } from "react-redux";
 
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   function redirectTo(route) {
     navigate(route);
   }
 
   const handleLogin = async () => {
-    const data = { email, password };
-    try {
-      const response = await fetch(`${ENDPOINT}login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-
-      if (response.ok) {
-        console.log("Successfully logged in!");
-        //redirect()
-      } else {
-        console.log("login failed");
-      }
-    } catch (error) {
-      console.log(error.message);
-    }
+    dispatch(login({ u_email: email, u_hashedpassword: password }));
   };
 
   return (
