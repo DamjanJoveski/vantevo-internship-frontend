@@ -22,8 +22,10 @@ export const UserReducer = (state = InitialState, action) => {
     switch (action.type) {
         case "LOGOUT":
             return {
+                ...state,
                 user: {
-                    user: null,
+                    ...state.user,
+                    current_user : null,
                     access_token: null,
                     logout: true,
                     messages: {
@@ -39,19 +41,21 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
+        
         case "LOGIN_REQUEST":
             return {
                 ...state,
                 user: {
                     ...state.user,
                     messages: {
-                        ...state.user.messages,
+                        ...state.user?.messages,
                         loginStatus: "Pending",
                         loginMessage: "Loading user .. Please wait."
                     }
                 }
 
             }
+        
         case "LOGIN_SUCCESS":
             return {
                 ...state,
@@ -67,6 +71,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
+        
         case "LOGIN_FAILURE":
             return {
                 ...state,
@@ -75,86 +80,225 @@ export const UserReducer = (state = InitialState, action) => {
                     messages: {
                         ...state.user.messages,
                         loginStatus: "Fail",
-                        loginMessage: action.payload.msg
+                        loginMessage: action.payload
                     }
                 }
 
             }
+        
         case "REGISTER_USER_REQUEST":
             return {
                 ...state,
-                messages: {
-                    createStatus: "Pending",
-                    createMessage: "Loading new user... Please wait."
+                user: {
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Pending",
+                        createMessage: "Loading new user... Please wait."
+                    }
+
                 }
 
+
             }
+        
         case "REGISTER_USER_SUCCESS":
             return {
-                user: action.payload.user,
-                messages: {
-                    createStatus: "Success",
-                    createMessage: "User created."
+                ...state,
+                user: {
+                    user: action.payload.user,
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Success",
+                        createMessage: "User created."
+                    }
                 }
+
             }
+        
         case "REGISTER_USER_FAILURE":
             return {
-                
-                user : null,
-                messages: {
-                    createStatus: "Fail",
-                    createMessage: action.payload
+                ...state,
+                user: {
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Fail",
+                        createMessage: action.payload
+                    }
+
+                }
+
+            }
+        
+        case "FETCH_USERS_REQUEST":
+            return {
+                ...state,
+                user: {
+                    ...state.user,
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Pending",
+                        createMessage: "Loading users ... Please wait."
+                    }
                 }
 
 
 
             }
-        case "FETCH_USER_REQUEST":
+        
+        case "FETCH_USERS_SUCCESS":
             return {
+                ...state,
+                user: {
+                    ...state.user,
+                    users: action.payload.users,
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Success",
+                        createMessage: ""
+                    }
+                }
 
             }
-        case "FETCH_USER_SUCCESS":
+
+        
+        case "FETCH_USERS_FAILURE":
             return {
+                ...state,
+                user: {
+                    ...state.user,
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Fail",
+                        createMessage: action.payload
+                    }
+                }
 
             }
-        case "FETCH_USER_FAILURE":
-            return {
 
-            }
+
         case "CREATE_USER_REQUEST":
             return {
+                ...state,
+                user: {
+                    ...state.user,
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Pending",
+                        createMessage: "Loading new user... Please wait."
+                    }
+                }
+
 
             }
         case "CREATE_USER_SUCCESS":
             return {
+                ...state,
+                user: {
+                    ...state.user,
+                    user: action.payload.user,
+                    messages: {
+                        ...state.user.messages,
+                        createStatus: "Success",
+                        createMessage: "User created."
+                    }
+
+                }
 
             }
         case "CREATE_USER_FAILURE":
             return {
+                ...state,
+                user: {
+                    ...state.user,
+                    user: null,
+                    messages: {
+                        ...state.user.message,
+                        createStatus: "Fail",
+                        createMessage: action.payload
+                    }
+
+                }
+
 
             }
+        
         case "UPDATE_USER_REQUEST":
             return {
+                ...state,
+                user : {
+                    ...state.user,
+                messages: {
+                    updateStatus: "Pending",
+                    updateMessage: "Loading user... Please wait."
+                }
+                }
+                
 
             }
+        
         case "UPDATE_USER_SUCCESS":
             return {
+                ...state,
+                user :{
+                    ...state.user,
+                    user: action.payload.user,
+                messages: {
+                    updateStatus: "Success",
+                    updateMessage: ""
+                }
+                }
+                
 
             }
+
         case "UPDATE_USER_FAILURE":
             return {
+                ...state,
+                user : {
+                    ...state.user,
+                messages: {
+                    updateStatus: "Fail",
+                    updateMessage: action.payload
+                }
+                }
+                
 
             }
         case "DELETE_USER_REQUEST":
             return {
+                ...state,
+                user :{ 
+                    ...state.user,
+                messages: {
+                    ...state.user.messages,
+                    deleteStatus: "Pending",
+                    deleteMessage: "Deleting user... Please wait."
+                }
+                }
+                
 
             }
         case "DELETE_USER_SUCCESS":
             return {
+                ...state,
+                user : {
+                    ...state.user,
+                user: action.payload.user,
+                messages: {
+                    deleteStatus: "Success",
+                    deleteMessage: ""
+                }
+                }
+                
 
             }
         case "DELETE_USER_FAILURE":
             return {
+                ...state,
+                messages: {
+                    deleteStatus: "Fail",
+                    deleteMessage: ""
+                }
 
             }
 

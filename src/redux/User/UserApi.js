@@ -33,21 +33,21 @@ export const register = async(user) => {
     return data
 }
 
-export const getUser = async (id, token) => {
-    const url = `${API_URL}/user/crud?id=${id}`
+// export const getUser = async (id, token) => {
+//     const url = `${API_URL}/user/crud?id=${id}`
     
-    const requestOptions = {
-        "method" : "GET",
-        "headers" : {
-            "Authorization" : `Bearer ${token}`
-        }
-    }
+//     const requestOptions = {
+//         "method" : "GET",
+//         "headers" : {
+//             "Authorization" : `Bearer ${token}`
+//         }
+//     }
 
-    const res = await fetch(url , requestOptions)
-    const data = res.json()
-    return data
+//     const res = await fetch(url , requestOptions)
+//     const data = res.json()
+//     return data
 
-}
+// }
 
 export const getUsers = async (token) => {
     const url = `${API_URL}/user/crud`
@@ -80,7 +80,7 @@ export const createUser = async (user , token) => {
 
 }
 
-export const updateUser = async (user , token) => {
+export const updateUser = async (user, token) => {
     const url = `${API_URL}/user/crud`
 
     const requestOptions = {
@@ -97,12 +97,11 @@ export const updateUser = async (user , token) => {
     
 }
 
-export const deleteUser = async (user) => {
-    const url = `${API_URL}/user/crud`
+export const deleteUser = async (u_id , token) => {
+    const url = `${API_URL}user/crud?u_id=${u_id}`
 
     const requestOptions = {
-        "method" : 'PUT',
-        "body" : user,
+        "method" : 'DELETE',
         "headers" : {
             "Authorization" : `Bearer ${token}`
         }

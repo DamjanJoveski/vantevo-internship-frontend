@@ -1,10 +1,11 @@
 import {Listings} from "./pages/Listings/Listings.jsx";
 import {CreateListing} from "./components/CreateListing.jsx";
 
-function App() {
 
+function App() {
     return(
         <div className='w-full mt-10'>
+      
             <Listings/>
             <CreateListing/>
         </div>
