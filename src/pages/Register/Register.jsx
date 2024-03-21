@@ -1,13 +1,21 @@
 import { useState } from "react";
-import { ENDPOINT } from "../../consts";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { register } from "../../redux/User/UserActions";
 
 export function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
   const [retypePass, setRetypePass] = useState("");
+
+  const [user, setUser] = useState({
+    u_role: 2,
+    u_firstname: '',
+    u_lastname: '' ,
+    u_hashedpassword: '',
+    u_usersalt: 'jhgkjsdgf',
+    u_email:''
+  });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -15,12 +23,19 @@ export function Register() {
     navigate("/login");
   }
 
-  const handleRegister = async () => {
-    dispatch(register({ email, password }));
-    // Reset form fields after successful registration
-    setEmail("");
-    setPassword("");
-    setRetypePass("");
+  const handleRegister =  () => {
+    const data = new FormData();
+    data.append('u_email', user['u_email'])
+    data.append('u_hashedpassword', user['u_hashedpassword']);
+    data.append('u_firstname', user['u_firstname']);
+    data.append('u_lastname', user['u_lastname']);
+    data.append('u_usersalt', user['u_usersalt']);
+    data.append('u_role', user['u_role']);
+
+    dispatch(register(data));
+
+    navigateToLogin()
+
   };
 
   return (
@@ -40,6 +55,42 @@ export function Register() {
             >
               <div>
                 <label
+                    htmlFor="firstName"
+                    className="block mb-2 text-sm font-medium text-white"
+                >
+                  First Name
+                </label>
+                <input
+                    type="text"
+                    name="firstName"
+                    id="firstName"
+                    value={user.u_firstname}
+                    onChange={(e) => setUser({...user, u_firstname:e.target.value})}
+                    className="border sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+                    placeholder="John"
+                    required
+                ></input>
+              </div>
+              <div>
+                <label
+                    htmlFor="lastName"
+                    className="block mb-2 text-sm font-medium text-white"
+                >
+                  Last Name
+                </label>
+                <input
+                    type="text"
+                    name="lastName"
+                    id="lastName"
+                    value={user.u_lastname}
+                    onChange={(e) => setUser({...user, u_lastname:e.target.value})}
+                    className="border sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
+                    placeholder="Peterson"
+                    required
+                ></input>
+              </div>
+              <div>
+                <label
                   htmlFor="email"
                   className="block mb-2 text-sm font-medium text-white"
                 >
@@ -49,8 +100,8 @@ export function Register() {
                   type="email"
                   name="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={user.u_email}
+                  onChange={(e) => setUser({...user, u_email:e.target.value})}
                   className="border sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   required
@@ -67,8 +118,8 @@ export function Register() {
                   type="password"
                   name="password"
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={user.u_hashedpassword}
+                  onChange={(e) => setUser({...user, u_hashedpassword:e.target.value})}
                   placeholder="••••••••"
                   className="border sm:text-sm rounded-lg  block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                   required

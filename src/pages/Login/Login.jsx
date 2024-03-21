@@ -1,12 +1,15 @@
 import { useState } from "react";
-import { ENDPOINT } from "../../consts.js";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/User/UserActions.js";
 import { useDispatch } from "react-redux";
 
 export function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [user, setUser] = useState({
+    email:'',
+    password:''
+  });
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -14,9 +17,13 @@ export function Login() {
     navigate(route);
   }
 
-  const handleLogin = async () => {
-    dispatch(login({ u_email: email, u_hashedpassword: password }));
+  const handleLogin = () => {
+    const data = new FormData();
+    data.append('u_email', user['email'])
+    data.append('u_hashedpassword', user['password']);
+    dispatch(login(data));
   };
+
 
   return (
     <section>
@@ -44,8 +51,8 @@ export function Login() {
                   type="email"
                   name="email"
                   id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  value={user.email}
+                  onChange={(e) => setUser({...user, email: e.target.value})}
                   className="border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   required
@@ -62,8 +69,8 @@ export function Login() {
                   type="password"
                   name="password"
                   id="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  value={user.password}
+                  onChange={(e) => setUser({...user, password:e.target.value})}
                   placeholder="••••••••"
                   className="border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                   required
