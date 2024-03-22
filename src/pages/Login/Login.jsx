@@ -4,10 +4,9 @@ import { login } from "../../redux/User/UserActions.js";
 import { useDispatch } from "react-redux";
 
 export function Login() {
-
   const [user, setUser] = useState({
-    email:'',
-    password:''
+    email: "",
+    password: "",
   });
 
   const navigate = useNavigate();
@@ -19,11 +18,13 @@ export function Login() {
 
   const handleLogin = () => {
     const data = new FormData();
-    data.append('u_email', user['email'])
-    data.append('u_hashedpassword', user['password']);
+    data.append("u_email", user["email"]);
+    data.append("u_hashedpassword", user["password"]);
     dispatch(login(data));
+    setTimeout(() => {
+      redirectTo("/listings");
+    }, 1000);
   };
-
 
   return (
     <section>
@@ -52,7 +53,7 @@ export function Login() {
                   name="email"
                   id="email"
                   value={user.email}
-                  onChange={(e) => setUser({...user, email: e.target.value})}
+                  onChange={(e) => setUser({ ...user, email: e.target.value })}
                   className="border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                   placeholder="name@company.com"
                   required
@@ -70,7 +71,9 @@ export function Login() {
                   name="password"
                   id="password"
                   value={user.password}
-                  onChange={(e) => setUser({...user, password:e.target.value})}
+                  onChange={(e) =>
+                    setUser({ ...user, password: e.target.value })
+                  }
                   placeholder="••••••••"
                   className="border border-gray-300 sm:text-sm rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white"
                   required
