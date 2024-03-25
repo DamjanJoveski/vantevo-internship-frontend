@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../../redux/User/UserActions.js";
-import { useDispatch } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 export function Login() {
 
@@ -24,6 +24,9 @@ export function Login() {
     dispatch(login(data));
   };
 
+  const userInfo = useSelector(state => state?.user)
+
+  console.log(userInfo.messages.loginStatus) // TREBA DA SE ZAVRSHI
 
   return (
     <section>
