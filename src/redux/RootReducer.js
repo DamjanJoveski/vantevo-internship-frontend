@@ -4,10 +4,14 @@ import { thunk } from 'redux-thunk';
 import { composeWithDevTools } from '@redux-devtools/extension'
 
 import { UserReducer } from './User/UserReducer';
+import { ListingReducer } from './Listing/ListingReducer';
+import { UserRoleReducer } from './UserRole/UserRoleReducer';
 
-// const allReducers = combineReducers({
-//     user : UserReducer
-// })
+const allReducers = combineReducers({
+    user : UserReducer,
+    listing : ListingReducer,
+    user_role : UserRoleReducer
+})
 
 
 const saveStoreToLS = state => {
@@ -34,7 +38,7 @@ const loadStoreFromLS = () => {
 
 
 export const store = createStore(
-    UserReducer,
+    allReducers,
     loadStoreFromLS(),
     composeWithDevTools(applyMiddleware(thunk))
 )

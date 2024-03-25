@@ -1,20 +1,13 @@
 import {API_URL} from '../../constants'
 
-export const getListing = async (id = null) => {
-    const url = `${API_URL}/listing/crud${id !== null ? `?id=${id}` : ''}`
-    
-    const res = await fetch(url)
-    const data = res.json()
-    return data
-
-}
-
-export const createListing = async (listing) => {
+export const getListings = async (token) => {
     const url = `${API_URL}/listing/crud`
-
+    
     const requestOptions = {
-        "method" : "POST",
-        "body" : listing
+        "method" : "GET",
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
     }
 
     const res = await fetch(url , requestOptions)
@@ -23,13 +16,48 @@ export const createListing = async (listing) => {
 
 }
 
-export const updateListing = async (listing) => {
+export const getListingById = async (id, token) => {
+    const url = `${API_URL}/listing/crud?L_ID=${id}`
+    
+    const requestOptions = {
+        "method" : "GET",
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
+    }
+
+    const res = await fetch(url , requestOptions)
+    const data = res.json()
+    return data
+
+}
+
+
+export const createListing = async (listing , token) => {
+    const url = `${API_URL}/listing/crud`
+
+    const requestOptions = {
+        "method" : "POST",
+        "body" : listing,
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } }
+
+    const res = await fetch(url , requestOptions)
+    const data = res.json()
+    return data
+
+}
+
+export const updateListing = async (listing , token) => {
     const url = `${API_URL}/listing/crud`
 
     const requestOptions = {
         "method" : "PUT",
-        "body" : listing
-    }
+        "body" : listing,
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } }
 
     const res = await fetch(url , requestOptions)
     const data = res.json()

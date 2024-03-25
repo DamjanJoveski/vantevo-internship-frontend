@@ -25,7 +25,7 @@ export const UserReducer = (state = InitialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    current_user : null,
+                    current_user: null,
                     access_token: null,
                     logout: true,
                     messages: {
@@ -41,7 +41,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
-        
+
         case "LOGIN_REQUEST":
             return {
                 ...state,
@@ -55,7 +55,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
-        
+
         case "LOGIN_SUCCESS":
             return {
                 ...state,
@@ -71,7 +71,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
-        
+
         case "LOGIN_FAILURE":
             return {
                 ...state,
@@ -85,7 +85,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
-        
+
         case "REGISTER_USER_REQUEST":
             return {
                 ...state,
@@ -100,7 +100,7 @@ export const UserReducer = (state = InitialState, action) => {
 
 
             }
-        
+
         case "REGISTER_USER_SUCCESS":
             return {
                 ...state,
@@ -114,7 +114,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
-        
+
         case "REGISTER_USER_FAILURE":
             return {
                 ...state,
@@ -128,7 +128,7 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
-        
+
         case "FETCH_USERS_REQUEST":
             return {
                 ...state,
@@ -144,7 +144,7 @@ export const UserReducer = (state = InitialState, action) => {
 
 
             }
-        
+
         case "FETCH_USERS_SUCCESS":
             return {
                 ...state,
@@ -160,7 +160,7 @@ export const UserReducer = (state = InitialState, action) => {
 
             }
 
-        
+
         case "FETCH_USERS_FAILURE":
             return {
                 ...state,
@@ -221,75 +221,75 @@ export const UserReducer = (state = InitialState, action) => {
 
 
             }
-        
+
         case "UPDATE_USER_REQUEST":
             return {
                 ...state,
-                user : {
+                user: {
                     ...state.user,
-                messages: {
-                    updateStatus: "Pending",
-                    updateMessage: "Loading user... Please wait."
+                    messages: {
+                        updateStatus: "Pending",
+                        updateMessage: "Loading user... Please wait."
+                    }
                 }
-                }
-                
+
 
             }
-        
+
         case "UPDATE_USER_SUCCESS":
             return {
                 ...state,
-                user :{
+                user: {
                     ...state.user,
                     user: action.payload.user,
-                messages: {
-                    updateStatus: "Success",
-                    updateMessage: ""
+                    messages: {
+                        updateStatus: "Success",
+                        updateMessage: ""
+                    }
                 }
-                }
-                
+
 
             }
 
         case "UPDATE_USER_FAILURE":
             return {
                 ...state,
-                user : {
+                user: {
                     ...state.user,
-                messages: {
-                    updateStatus: "Fail",
-                    updateMessage: action.payload
+                    messages: {
+                        updateStatus: "Fail",
+                        updateMessage: action.payload
+                    }
                 }
-                }
-                
+
 
             }
         case "DELETE_USER_REQUEST":
             return {
                 ...state,
-                user :{ 
+                user: {
                     ...state.user,
-                messages: {
-                    ...state.user.messages,
-                    deleteStatus: "Pending",
-                    deleteMessage: "Deleting user... Please wait."
+                    messages: {
+                        ...state.user.messages,
+                        deleteStatus: "Pending",
+                        deleteMessage: "Deleting user... Please wait."
+                    }
                 }
-                }
-                
+
 
             }
         case "DELETE_USER_SUCCESS":
             return {
                 ...state,
-                user : {
+                user: {
                     ...state.user,
-                user: action.payload.user,
-                messages: {
-                    deleteStatus: "Success",
-                    deleteMessage: ""
+                    user: action.payload.user,
+                    messages: {
+                        deleteStatus: "Success",
+                        deleteMessage: ""
+                    }
                 }
-                }
-                
+
 
             }
         case "DELETE_USER_FAILURE":
@@ -301,6 +301,8 @@ export const UserReducer = (state = InitialState, action) => {
                 }
 
             }
+        default:
+            return state
 
     }
 

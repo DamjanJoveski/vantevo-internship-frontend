@@ -41,8 +41,6 @@ export const updateUser = (user) => (dispatch , getState) => {
 
     UpdateUserCall(user , getState().user.access_token)
     .then(res => {
-        console.log(res)
-        console.log(getState().user.access_token)
         if(res.code >= 400){
             throw new Error(res.msg)
         }

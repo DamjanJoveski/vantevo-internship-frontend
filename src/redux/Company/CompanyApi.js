@@ -18,11 +18,14 @@ export const createCompany = async (company) => {
     return data
 }
 
-export const updateCompany = async company => {
+export const updateCompany = async (company , token) => {
     const url = `${API_URL}/company/crud`
     const requestOptions = {
         "method" : "PUT",
-        "body" : company
+        "body" : company,
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
     }
 
     const res = await fetch(url , requestOptions)
@@ -31,11 +34,13 @@ export const updateCompany = async company => {
 
 }
 
-export const deleteCompany = async company => {
-    const url = `${API_URL}/company/crud`
+export const deleteCompany = async (co_id , token) => {
+    const url = `${API_URL}/company/crud?co_id=${co_id}`
     const requestOptions = {
         "method" : "PUT",
-        "body" : company
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
     }
 
     const res = await fetch(url , requestOptions)
