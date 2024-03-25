@@ -16,10 +16,11 @@ function App() {
 
   useEffect(() => {
     if (
-      !accessToken &&
-      ["/listings", "/create-listings", "/listing/"].includes(
-        window.location.pathname
-      )
+      (!accessToken &&
+        ["/listings", "/create-listings"].some((route) =>
+          window.location.pathname.startsWith(route)
+        )) ||
+      (!accessToken && window.location.pathname.match(/^\/listing\/\d+$/))
     ) {
       navigate("/login");
     } else if (
@@ -39,7 +40,7 @@ function App() {
       <Navbar isLoggedIn={!!accessToken} />
       {ready && (
         <Routes>
-          <Route path="/" element={<Navigate to="/login" />} />
+          <Route path="*" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
