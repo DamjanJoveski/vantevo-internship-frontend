@@ -20,7 +20,7 @@ function App() {
   useEffect(() => {
     if (
       (!accessToken &&
-        ["/listings", "/create-listings"].some((route) =>
+        ["/admin/listings", "/admin/create-listings", "/admin/edit-listing"].some((route) =>
           window.location.pathname.startsWith(route)
         )) ||
       (!accessToken && window.location.pathname.match(/^\/listing\/\d+$/))
@@ -32,7 +32,7 @@ function App() {
         window.location.pathname
       )
     ) {
-      navigate("/listings");
+      navigate("/admin/listings");
     } else {
       setReady(true);
     }
@@ -50,12 +50,12 @@ function App() {
           <Route path="/forgot-password" element={<ForgotPassword />} />
 
           {/* Admin routes */}
-          <Route path="/create-listings" element={<CreateListing />} />
-          <Route path="/listings" element={<Listings />} />
-          <Route path="/listing/:id" element={<ListingDetails />} />
+          <Route path="/admin/create-listings" element={<CreateListing />} />
+          <Route path="/admin/listings" element={<Listings />} />
+          <Route path="/admin/listing/:id" element={<ListingDetails />} />
+          <Route path="/admin/edit-listing" element={<EditListing />} />
 
           {/* User routes */}
-          <Route path="/edit-listing" element={<EditListing />} />
           <Route path="/" element={<Home />} />
 
         </Routes>
