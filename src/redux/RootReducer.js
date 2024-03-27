@@ -8,6 +8,7 @@ import { ListingReducer } from './Listing/ListingReducer';
 import { UserRoleReducer } from './UserRole/UserRoleReducer';
 import { CompanyReducer } from './Company/CompanyReducer';
 import { SaleReducer } from './Sale/SaleReducer';
+import { PaymentStatusReducer } from './PaymentSatus/PaymentStatusReducer';
 
 const allReducers = combineReducers({
     user : UserReducer,
@@ -15,6 +16,7 @@ const allReducers = combineReducers({
     user_role : UserRoleReducer,
     company : CompanyReducer,
     sale : SaleReducer,
+    payment_status : PaymentStatusReducer
 })
 
 
