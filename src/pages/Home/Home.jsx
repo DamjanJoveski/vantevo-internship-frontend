@@ -2,8 +2,7 @@ import React from 'react';
 
 function Home() {
     const handleBuyNow = () => {
-        // Handle buy now action
-        // You can specify the functionality later
+        window.location.href = 'url';
     };
 
     return (
