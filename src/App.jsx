@@ -1,11 +1,7 @@
 import { Listings } from "./pages/Listings/Listings.jsx";
 import { CreateListing } from "./components/CreateListing.jsx";
-<<<<<<< HEAD
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
-=======
 import { EditListing } from "./components/EditListing.jsx";
 import { Route, Routes, useNavigate } from "react-router-dom";
->>>>>>> 596345e (small change)
 import { Login } from "./pages/Login/Login.jsx";
 import { Register } from "./pages/Register/Register.jsx";
 import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword.jsx";
