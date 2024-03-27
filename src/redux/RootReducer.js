@@ -6,11 +6,15 @@ import { composeWithDevTools } from '@redux-devtools/extension'
 import { UserReducer } from './User/UserReducer';
 import { ListingReducer } from './Listing/ListingReducer';
 import { UserRoleReducer } from './UserRole/UserRoleReducer';
+import { CompanyReducer } from './Company/CompanyReducer';
+import { SaleReducer } from './Sale/SaleReducer';
 
 const allReducers = combineReducers({
     user : UserReducer,
     listing : ListingReducer,
-    user_role : UserRoleReducer
+    user_role : UserRoleReducer,
+    company : CompanyReducer,
+    sale : SaleReducer,
 })
 
 

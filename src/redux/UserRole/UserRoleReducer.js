@@ -47,6 +47,36 @@ export const UserRoleReducer = (state = InitialState, action) => {
                 }
 
             }
+            case "FETCH_USER_ROLES_BY_ID_REQUEST":
+            return {
+                ...state,
+                user_role : {
+                    ...state.user_role,
+                    loadStatus : "Pending",
+                    loadMessage : "Loading user roles , please wait."
+                }
+
+            }
+        case "FETCH_USER_ROLES_BY_ID_SUCCESS":
+            return {
+                ...state,
+                user_role : {
+                    ...state.user_role,
+                    user_role : action.payload.user_role,
+                    loadStatus : "Success",
+                    loadMessage : ""
+                }
+
+            }
+        case "FETCH_USER_ROLES_BY_ID_FAILURE":
+            return {
+                ...state,
+                user_role : {
+                    loadStatus: "Fail",
+                    loadMessage : action.payload
+                }
+
+            }
         case "CREATE_USER_ROLE_REQUEST":
             return {
 

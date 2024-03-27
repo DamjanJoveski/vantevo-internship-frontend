@@ -1,20 +1,47 @@
 import {API_URL} from '../../constants'
 
-export const getSales = async (id = null) => {
-    const url = `${API_URL}/sale/crud${id !== null ? `?id=${id}` : ''}`
+
+export const getSales = async (token) => {
+    const url = `${API_URL}/sale/crud`
+
+    const requestOptions = {
+        "method" : "GET",
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
+    }
     
-    const res = await fetch(url)
+    const res = await fetch(url , requestOptions)
     const data = res.json()
     return data
 
 }
 
-export const createSale = async (sale) => {
+export const getSaleById = async (id , token) => {
+    const url = `${API_URL}/sale/crud?S_ID=${id}`
+
+    const requestOptions = {
+        "method" : "GET",
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
+    }
+    
+    const res = await fetch(url , requestOptions)
+    const data = res.json()
+    return data
+
+}
+
+export const createSale = async (sale , token) => {
     const url = `${API_URL}/sale/crud`
 
     const requestOptions = {
         "method" : "POST",
-        "body" : sale
+        "body" : sale,
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
     }
 
     const res = await fetch(url , requestOptions)
@@ -23,12 +50,15 @@ export const createSale = async (sale) => {
 
 }
 
-export const updateSale = async (sale) => {
+export const updateSale = async (sale , token) => {
     const url = `${API_URL}/sale/crud`
 
     const requestOptions = {
         "method" : "PUT",
-        "body" : sale
+        "body" : sale,
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
     }
 
     const res = await fetch(url , requestOptions)
@@ -37,12 +67,15 @@ export const updateSale = async (sale) => {
     
 }
 
-export const deleteSale = async (sale) => {
-    const url = `${API_URL}/sale/crud`
+export const deleteSale = async (s_id , token) => {
+    const url = `${API_URL}/sale/crud?S_ID=${s_id}`
 
     const requestOptions = {
         "method" : "PUT",
-        "body" : sale
+        "body" : s_id,
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
     }
 
     const res = await fetch(url , requestOptions)

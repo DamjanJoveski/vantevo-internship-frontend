@@ -34,10 +34,6 @@ export function Login() {
     }
   };
 
-
-
-
-
   return (
     <section>
       <div className="flex flex-col items-center justify-center mx-auto md:h-screen ">
@@ -46,6 +42,7 @@ export function Login() {
             <h1 className="text-xl font-bold text-gray-900 md:text-2xl text-white">
               Log in to your account
             </h1>
+              <button className="bg-red-500 text-white p-2" onClick={getSal}>GET DATA</button>
             <form
               className="space-y-4 md:space-y-6"
               onSubmit={(e) => {

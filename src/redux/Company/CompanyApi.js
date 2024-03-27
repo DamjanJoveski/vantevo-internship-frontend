@@ -7,6 +7,21 @@ export const getCompanies = async (id = null) => {
     return data
 }
 
+export const getCompanyById = async (co_id, token) => {
+    const url = `${API_URL}/company/crud?CO_ID=${co_id}`
+
+    const requestOptions = {
+        "method" : "GET",
+        "headers" : {
+            "Authorization" : `Bearer ${token}`
+        } 
+    }
+
+    const res = await fetch(url , requestOptions)
+    const data = res.json()
+    return data
+}
+
 export const createCompany = async (company) => {
     const url = `${API_URL}/company/crud`
     const requestOptions = {
@@ -35,7 +50,7 @@ export const updateCompany = async (company , token) => {
 }
 
 export const deleteCompany = async (co_id , token) => {
-    const url = `${API_URL}/company/crud?co_id=${co_id}`
+    const url = `${API_URL}/company/crud?CO_ID=${co_id}`
     const requestOptions = {
         "method" : "PUT",
         "headers" : {

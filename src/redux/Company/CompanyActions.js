@@ -1,7 +1,8 @@
 import { createCompany as CreateCompanyCall,
 updateCompany as UpdateCompanyCall, 
 getCompanies as GetCompaniesCall,
-deleteCompany as DeleteCompanyCall} from './CompanyApi.js'
+deleteCompany as DeleteCompanyCall,
+getCompanyById as GetCompanyByIdCall} from './CompanyApi.js'
 
 
 export const createCompany = (company) => (dispatch , getState) => {
@@ -18,9 +19,9 @@ export const createCompany = (company) => (dispatch , getState) => {
 
 }
 
-export const fetchCompanies = (co_id = null) => (dispatch , getState) => {
+export const fetchCompanies = () => (dispatch , getState) => {
     dispatch({type : "FETCH_COMPANIES_REQUEST"})
-    GetCompaniesCall(getState().user.access_token)
+    GetCompaniesCall(getState().user.user.access_token)
     .then(res => {
         if(res.code >= 400){
             throw new Error(res.msg)
@@ -30,10 +31,22 @@ export const fetchCompanies = (co_id = null) => (dispatch , getState) => {
 
 }
 
+export const fetchCompanyById = (c_id) => (dispatch , getState) =>{ 
+    dispatch({type: "FETCH_COMPANY_BY_ID_REQUEST"})
+    
+    GetCompanyByIdCall(c_id ,getState().user.user.access_token)
+    .then(res => {
+        if(res.code >= 400){
+            throw new Error(res.msg)
+        }
+        dispatch({type: "FETCH_COMPANY_BY_ID_SUCCESS" , payload: res})})
+    .catch(error => {dispatch({type : "FETCH_COMPANY_BY_ID_FAILURE" , payload: error.message})})
+}
+
 export const updateCompany = (company) => (dispatch , getState) => {
     dispatch({type : "UPDATE_COMPANY_REQUEST"})
 
-    UpdateCompanyCallCompanyCall(company , getState().user.access_token)
+    UpdateCompanyCallCompanyCall(company , getState().user.user.access_token)
     .then(res => {
         if(res.code >= 400){
             throw new Error(res.msg)
@@ -44,14 +57,14 @@ export const updateCompany = (company) => (dispatch , getState) => {
 }
 
 export const deleteCompany = (co_id) => (dispatch , getState) => {
-    dispatch({type : "UPDATE_COMPANY_REQUEST"})
+    dispatch({type : "DELETE_COMPANY_REQUEST"})
 
-    DeleteCompanyCall(co_id , getState().user.access_token)
+    DeleteCompanyCall(co_id , getState().user.user.access_token)
     .then(res => {
         if(res.code >= 400){
             throw new Error(res.msg)
         }
-        dispatch({type: "UPDATE_COMPANY_SUCCESS" , payload: res})})
-    .catch(error => {dispatch({type : "UPDATE_COMPANY_FAILURE" , payload: error.message})
+        dispatch({type: "DELETE_COMPANY_SUCCESS" , payload: res})})
+    .catch(error => {dispatch({type : "DELETE_COMPANY_FAILURE" , payload: error.message})
     })
 }
