@@ -5,6 +5,8 @@ import { Login } from "./pages/Login/Login.jsx";
 import { Register } from "./pages/Register/Register.jsx";
 import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword.jsx";
 import { ListingDetails } from "./pages/Listing/Listing.jsx";
+import { Home } from "./pages/Home/Home.jsx";
+
 import { useEffect, useState } from "react";
 
 function App() {
@@ -16,7 +18,8 @@ function App() {
   useEffect(() => {
     if (
       !accessToken &&
-      ["/listings", "/create-listings", "/listing/"].some((path) =>
+      //   ADD /admin/ for admin panel routes 
+      ["/admin/listings", "/admin/create-listings", "/admin/listing/"].some((path) =>
         window.location.pathname.startsWith(path)
       )
     ) {
@@ -30,12 +33,21 @@ function App() {
     <div className="w-full bg-gray-900">
       {ready && (
         <Routes>
+          {/* Authentication routes */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/create-listings" element={<CreateListing />} />
-          <Route path="/listings" element={<Listings />} />
-          <Route path="/listing/:id" element={<ListingDetails />} />
+
+          {/* Admin routes */}
+          <Route path="/admin/create-listings" element={<CreateListing />} />
+          <Route path="/admin/listings" element={<Listings />} />
+          <Route path="/admin/listing/:id" element={<ListingDetails />} />
+
+          {/* User routes */}
+          <Route path="/ls" element={<Listings />} />
+          <Route path="/" element={<Home />} />
+
+
         </Routes>
       )}
     </div>
