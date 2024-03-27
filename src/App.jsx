@@ -7,6 +7,7 @@ import { ForgotPassword } from "./pages/ForgotPassword/ForgotPassword.jsx";
 import { ListingDetails } from "./pages/Listing/Listing.jsx";
 import { useEffect, useState } from "react";
 import { Navbar } from "./components/Navbar.jsx";
+import { EditListing } from "./components/EditListing.jsx";
 
 function App() {
   const ls = JSON.parse(localStorage.getItem("store")) || {};
@@ -20,7 +21,8 @@ function App() {
         ["/listings", "/create-listings"].some((route) =>
           window.location.pathname.startsWith(route)
         )) ||
-      (!accessToken && window.location.pathname.match(/^\/listing\/\d+$/))
+      (!accessToken && window.location.pathname.match(/^\/listing\/\d+$/)) ||
+      (!accessToken && window.location.pathname.match(/^\/edit-listing\/\d+$/))
     ) {
       navigate("/login");
     } else if (
@@ -47,6 +49,7 @@ function App() {
           <Route path="/create-listings" element={<CreateListing />} />
           <Route path="/listings" element={<Listings />} />
           <Route path="/listing/:id" element={<ListingDetails />} />
+          <Route path="/edit-listing/:id" element={<EditListing />} />
         </Routes>
       )}
     </div>

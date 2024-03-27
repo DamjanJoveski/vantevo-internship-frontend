@@ -6,19 +6,11 @@ export function Listings() {
   //GET REQUEST TO THE SERVER
 
   const [filters, setFilters] = useState({
-    industry: "",
-    location: "",
     priceRange: "",
   });
 
   const filteredCompanies = MOCK_COMPANIES.filter((company) => {
-    return (
-      (!filters.industry ||
-        company.industry.toLowerCase() === filters.industry.toLowerCase()) &&
-      (!filters.location ||
-        company.location.toLowerCase() === filters.location.toLowerCase()) &&
-      (!filters.priceRange || company.price <= parseInt(filters.priceRange))
-    );
+    return !filters.priceRange || company.price <= parseInt(filters.priceRange);
   });
 
   const handleFilterChange = (filterName, value) => {
@@ -33,30 +25,6 @@ export function Listings() {
 
       {/* Filter controls */}
       <div className="flex mb-4">
-        {/* Industry filter */}
-        <select
-          className="bg-white border rounded px-4 py-2 mr-4 focus:outline-none focus:shadow-outline"
-          value={filters.industry}
-          onChange={(e) => handleFilterChange("industry", e.target.value)}
-        >
-          <option value="">All Industries</option>
-          <option value="Technology">Technology</option>
-          <option value="Finance">Finance</option>
-          <option value="Renewable Energy">Renewable Energy</option>
-        </select>
-
-        {/* Location filter */}
-        <select
-          className="bg-white border rounded px-4 py-2 mr-4 focus:outline-none focus:shadow-outline"
-          value={filters.location}
-          onChange={(e) => handleFilterChange("location", e.target.value)}
-        >
-          <option value="">All Locations</option>
-          <option value="New York, NY">New York, NY</option>
-          <option value="Los Angeles, CA">Los Angeles, CA</option>
-          <option value="San Francisco, CA">San Francisco, CA</option>
-        </select>
-
         {/* Price range filter */}
         <select
           className="bg-white border rounded px-4 py-2 mr-4 focus:outline-none focus:shadow-outline"
@@ -78,8 +46,6 @@ export function Listings() {
             name={company.name}
             description={company.description}
             price={company.price}
-            location={company.location}
-            industry={company.industry}
           />
         ))}
       </div>
