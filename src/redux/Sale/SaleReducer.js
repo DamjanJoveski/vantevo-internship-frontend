@@ -1,7 +1,6 @@
 const InitialState = {
     sale: {
         sales: [],
-        specific_sale: null,
         createStatus: "idle",
         createMessage: "",
         loadStatus: "idle",
@@ -65,7 +64,7 @@ export const SaleReducer = (state = InitialState, action) => {
                 ...state,
                 sale :{
                     ...state.sale,
-                    sale : action.payload.sale,
+                    fetched_sale : action.payload.sale,
                     loadStatus : "Success",
                     loadMessage : ""
                 }

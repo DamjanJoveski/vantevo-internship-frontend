@@ -62,7 +62,7 @@ export const UserRoleReducer = (state = InitialState, action) => {
                 ...state,
                 user_role : {
                     ...state.user_role,
-                    user_role : action.payload.user_role,
+                    fetched_user_role : action.payload.user_role,
                     loadStatus : "Success",
                     loadMessage : ""
                 }

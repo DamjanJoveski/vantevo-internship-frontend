@@ -53,7 +53,7 @@ export const PaymentStatusReducer = (state = InitialState, action) => {
                 payment_status : {
                     ...state.payment_status,
                     loadStatus : "Pending",
-                    loadMessage : "Loading user roles , please wait."
+                    loadMessage : "Loading payment status , please wait."
                 }
 
             }
@@ -62,7 +62,7 @@ export const PaymentStatusReducer = (state = InitialState, action) => {
                 ...state,
                 payment_status : {
                     ...state.payment_status,
-                    payment_status : action.payload.payment_status,
+                    fetched_payment_status : action.payload.payment_status,
                     loadStatus : "Success",
                     loadMessage : ""
                 }

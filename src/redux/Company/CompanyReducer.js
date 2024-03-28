@@ -1,7 +1,6 @@
 const InitialState = {
     company: {
         companies: [],
-        specific_company: null,
         createStatus: "idle",
         createMessage: "",
         loadStatus: "idle",
@@ -65,7 +64,7 @@ export const CompanyReducer = (state = InitialState, action) => {
                 ...state,
                 company : {
                     ...state.company,
-                    specific_company : action.payload.company,
+                    fetched_company : action.payload.company,
                     loadStatus : "Success",
                     loadMessage : ""
                 }

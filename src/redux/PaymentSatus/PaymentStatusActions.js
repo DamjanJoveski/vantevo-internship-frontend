@@ -1,5 +1,5 @@
 import { getPaymentStatuses as getPaymentStatusesCall ,
-    getPaymentStatusById as getPaymentStatusByIdCall} from "./UserRoleApi";
+    getPaymentStatusById as getPaymentStatusByIdCall} from "./PaymentStatusApi";
     
     
     

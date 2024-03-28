@@ -5,10 +5,10 @@ deleteCompany as DeleteCompanyCall,
 getCompanyById as GetCompanyByIdCall} from './CompanyApi.js'
 
 
-export const createCompany = (company) => (dispatch , getState) => {
+export const createCompany = (company , token) => (dispatch , getState) => {
     dispatch({type : "CREATE_COMPANY_REQUEST"})
 
-    CreateCompanyCall(company)
+    CreateCompanyCall(company , getState().user.user.access_token)
     .then(res => {
         if(res.code >= 400){
             throw new Error(res.msg)
@@ -21,7 +21,7 @@ export const createCompany = (company) => (dispatch , getState) => {
 
 export const fetchCompanies = () => (dispatch , getState) => {
     dispatch({type : "FETCH_COMPANIES_REQUEST"})
-    GetCompaniesCall(getState().user.user.access_token)
+    GetCompaniesCall()
     .then(res => {
         if(res.code >= 400){
             throw new Error(res.msg)

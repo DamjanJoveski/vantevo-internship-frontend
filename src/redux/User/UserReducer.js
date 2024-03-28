@@ -241,7 +241,7 @@ export const UserReducer = (state = InitialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    user: action.payload.user,
+                    updated_user: action.payload.user,
                     messages: {
                         updateStatus: "Success",
                         updateMessage: ""
@@ -283,7 +283,7 @@ export const UserReducer = (state = InitialState, action) => {
                 ...state,
                 user: {
                     ...state.user,
-                    user: action.payload.user,
+                    deleted_user: action.payload.user,
                     messages: {
                         deleteStatus: "Success",
                         deleteMessage: ""

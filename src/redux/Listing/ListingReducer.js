@@ -1,6 +1,5 @@
 const InitialState = {
     listing: {
-        specific_listing : null,
         listings: [],
         createStatus: "idle",
         createMessage: "",
@@ -64,7 +63,7 @@ export const ListingReducer = (state = InitialState, action) => {
                 ...state,
                 listing : {
                     ...state.listing,
-                    specific_listing : action.payload.listing,
+                    fetched_listing : action.payload.listing,
                     loadStatus : "Success",
                     loadMessage : "",
 
@@ -127,7 +126,7 @@ export const ListingReducer = (state = InitialState, action) => {
                 ...state,
                 listing : {
                     ...state.listing,
-                    specific_listing : action.payload.listing,
+                    updated_listing : action.payload.listing,
                     updateStatus : "Success",
                     updateMessage : ""
 
@@ -159,7 +158,7 @@ export const ListingReducer = (state = InitialState, action) => {
                 ...state,
                 listing : {
                     ...state.listing,
-                    specific_listing : action.payload.listing,
+                    deleted_listing : action.payload.listing,
                     deleteStatus : "Success",
                     deleteMessage : ""
 
